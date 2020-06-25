@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head>
+    <title>Index</title>
+</head>
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div style="text-align: center">
+        <div>
+            <h4>Welcome <b sec:authentication="name"></b></h4>
+        </div>
+
+        <h5>
+            Assigned permissions:
+        </h5>
+        <div th:each="permission: ${#authentication.authorities}">
+            <span th:text="${permission.getAuthority()}"></span>
+        </div>
+
+        <div>
+            <h5>Last logged in time in UTC: <b th:text="${lastLoggedInTime}"></b></h5>
+        </div>
+    </div>
+
+</div>
+</body>
+</html>

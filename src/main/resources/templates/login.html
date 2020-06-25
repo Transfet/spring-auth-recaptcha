@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      xmlns:th="http://www.thymeleaf.org"
+      layout:decorate="~{fragments/layout}">
+<head>
+    <title>Login</title>
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+<div layout:fragment="content" th:remove="tag">
+    <div class="form-content" style="margin-bottom: 20px">
+        <div>
+            <h1>Information</h1>
+        </div>
+        <div>
+            <p>The username and the password is case sensitive!</p>
+        </div>
+        <div>
+            <p><b>Available username</b></p>
+        </div>
+        <div>
+            <p>Admin, User1, User2, User3</p>
+        </div>
+        <div>
+            <p><b>password:</b></p>
+        </div>
+        <div>
+            <p>password</p>
+        </div>
+    </div>
+    <div class="form-content">
+        <div th:if="${param.error}">
+            <p style="color: red">Username or password is not correct!</p>
+        </div>
+        <div th:if="${param.recaptchaError}">
+            <p style="color: red">reCAPTCHA is required!</p>
+        </div>
+        <form action="/login" method="post">
+            <input type="text" id="login" name="username" placeholder="username">
+            <input type="password" id="password" name="password" placeholder="password">
+            <input type="submit" value="Log In">
+            <div th:if="${param.showRecaptcha}">
+                <div class="g-recaptcha" th:attr="data-sitekey=${@captchaProperties.getSite()}"></div>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

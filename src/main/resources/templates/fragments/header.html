@@ -1,0 +1,15 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<body>
+    <th:block th:fragment="header">
+        <div class="navbar" id="navigation">
+            <a class="nav item nav-link" th:href="@{/}">Home</a>
+            <a class="nav-item nav-link" sec:authorize="hasAnyAuthority('ACCESS_ADMIN')" th:href="@{/admin}">Admin</a>
+            <a class="nav-item nav-link" sec:authorize="hasAnyAuthority('ACCESS_EDITOR')" th:href="@{/editor}">Editor</a>
+            <a class="nav-item nav-link" sec:authorize="hasAnyAuthority('ACCESS_PROFILE')" th:href="@{/profile}">Profile</a>
+            <a class="nav-item nav-link" sec:authorize="isAuthenticated()" th:href="@{/logout}">Log out</a>
+        </div>
+    </th:block>
+</body>
+</html>

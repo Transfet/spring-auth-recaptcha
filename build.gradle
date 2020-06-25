@@ -1,0 +1,52 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version "2.3.1.RELEASE"
+}
+
+group 'com.icf'
+version '0.1.0'
+
+sourceCompatibility = 11
+targetCompatibility = 11
+
+repositories {
+    mavenCentral()
+}
+
+ext {
+    springBootVersion = "2.3.1.RELEASE"
+    lombokVersion = "1.18.8"
+    testNgVersion = "6.14.3"
+
+    unitTestPattern = '**/*Test.class'
+
+}
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-web:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-data-jpa:${springBootVersion}")
+    compile("org.springframework.boot:spring-boot-starter-security:${springBootVersion}")
+
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-thymeleaf', version: '2.3.1.RELEASE'
+    compile group: 'org.thymeleaf.extras', name: 'thymeleaf-extras-springsecurity5', version: '3.0.4.RELEASE'
+    compile group: 'nz.net.ultraq.thymeleaf', name: 'thymeleaf-layout-dialect', version: '2.4.1'
+
+    compile group: 'com.github.mkopylec', name: 'recaptcha-spring-boot-starter', version: '2.3.1'
+
+    compile group: 'org.springframework.session', name: 'spring-session-jdbc', version: '2.3.0.RELEASE'
+    compile group: 'com.h2database', name: 'h2', version: '1.4.200'
+
+
+    compile("org.projectlombok:lombok:${lombokVersion}")
+    annotationProcessor("org.projectlombok:lombok:${lombokVersion}")
+
+    testCompile("org.testng:testng:${testNgVersion}")
+    testCompile("org.springframework.boot:spring-boot-starter-test:${springBootVersion}")
+}
+
+test {
+    useTestNG {
+        include unitTestPattern
+    }
+}
