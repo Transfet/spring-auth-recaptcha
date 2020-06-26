@@ -2,12 +2,10 @@ package com.transfet.auth.home;
 
 import com.transfet.auth.user.UserService;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.time.LocalDateTime;
@@ -18,14 +16,12 @@ import static java.util.Objects.nonNull;
  * Controller for serving the main views.
  */
 @Controller
-@RequestMapping("/")
-@Slf4j
 @RequiredArgsConstructor
 public class HomeController {
 
     private final UserService userService;
 
-    @GetMapping
+    @GetMapping("/")
     public ModelAndView getIndexPage(Authentication authentication) {
 
         ModelAndView view = new ModelAndView();
@@ -42,22 +38,22 @@ public class HomeController {
     }
 
     @GetMapping("/admin")
-    @PreAuthorize("hasAnyAuthority(webSecurityConfiguration.ADMIN_AUTHORITY)")
-    private String getAdminPage(){
+    @PreAuthorize("hasAuthority('ACCESS_ADMIN')")
+    public String getAdminPage(){
 
         return "admin";
     }
 
     @GetMapping("/profile")
-    @PreAuthorize("hasAnyAuthority(webSecurityConfiguration.PROFILE_AUTHORITY)")
-    private String getProfilePage(){
+    @PreAuthorize("hasAuthority('ACCESS_PROFILE')")
+    public String getProfilePage(){
 
         return "profile";
     }
 
     @GetMapping("/editor")
-    @PreAuthorize("hasAnyAuthority(webSecurityConfiguration.EDITOR_AUTHORITY)")
-    private String getEditorPage(){
+    @PreAuthorize("hasAuthority('ACCESS_EDITOR')")
+    public String getEditorPage(){
 
         return "editor";
     }

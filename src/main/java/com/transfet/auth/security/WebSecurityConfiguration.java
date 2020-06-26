@@ -20,6 +20,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     private static final String[] ENABLED_PATHS = {"/login*", "/resources/**", "/h2-console/**"};
     private static final String LOGIN_PATH = "/login";
     private static final String[] COOKIES = {"JSESSIONID"};
+    private static final String ACCESS_DENIED_URL = "/access-denied";
     private final FormLoginConfigurerEnhancer formLoginConfigurerEnhancer;
 
     @Override
@@ -38,6 +39,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers(ENABLED_PATHS).permitAll()
                 .anyRequest()
                 .authenticated()
+                .and()
+                .exceptionHandling()
+                .accessDeniedPage(ACCESS_DENIED_URL)
                 .and()
                 .logout()
                 .deleteCookies(COOKIES)
