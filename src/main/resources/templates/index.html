@@ -21,7 +21,7 @@
         </div>
 
         <div>
-            <h5>Last logged in time in UTC: <b th:text="${lastLoggedInTime}"></b></h5>
+            <h5>Last logged in time in UTC: <b th:text="${#temporals.format(lastLoggedInTime, 'dd-MM-yyyy HH:mm:ss')}"></b></h5>
         </div>
     </div>
 
