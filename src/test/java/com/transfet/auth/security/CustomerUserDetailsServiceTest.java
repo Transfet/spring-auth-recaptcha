@@ -35,6 +35,7 @@ public class CustomerUserDetailsServiceTest {
     private static final long PERMISSION_ID_4 = 4L;
     private static final String TEST_NAME = "test_name";
     private static final String TEST_PASSWORD = "test_password";
+    private static final long NUMBER_OF_EXPECTED_AUTHORITIES = 4L;
 
 
     @Mock
@@ -70,7 +71,7 @@ public class CustomerUserDetailsServiceTest {
                 .count();
 
 
-        assertThat(numberOfContainedPermissions, is(4L));
+        assertThat(numberOfContainedPermissions, is(NUMBER_OF_EXPECTED_AUTHORITIES));
     }
 
     private User createTestUser() {

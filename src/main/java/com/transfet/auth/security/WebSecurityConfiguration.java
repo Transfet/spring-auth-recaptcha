@@ -19,6 +19,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String[] ENABLED_PATHS = {"/login*", "/resources/**", "/h2-console/**"};
     private static final String LOGIN_PATH = "/login";
+    private static final String[] COOKIES = {"JSESSIONID"};
     private final FormLoginConfigurerEnhancer formLoginConfigurerEnhancer;
 
     @Override
@@ -39,7 +40,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .logout()
-                .deleteCookies("JSESSIONID")
+                .deleteCookies(COOKIES)
                 .invalidateHttpSession(false);
     }
 
